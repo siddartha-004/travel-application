@@ -3,31 +3,23 @@ import "./Register.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Alert } from '@mui/material';
+
 
 function Register() {
-  //error state
   let [error, setError] = useState("");
   let [selectedFile,setSelectedFile]=useState(null)
-
-  //navigate
   const navigate = useNavigate();
-
-  //use form hook
   let {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  //adding new user
   let addNewUser = (newUser) => {
-    // console.log(newUser);
-    //make HTTP POST req to save newUser to localAPI
-
     let fd=new FormData();
-    //append newUser to form data
+
     fd.append("user",JSON.stringify(newUser))
-    //append selected file to form data
+   
     fd.append("photo",selectedFile)
 
     axios
@@ -35,7 +27,7 @@ function Register() {
       .then((response) => {
         
         if (response.status === 201) {
-          //naviagte to login componentxp
+        
           navigate('/login')
         }
         if(response.status!==201){
@@ -43,43 +35,31 @@ function Register() {
         }
       })
       .catch((err) => {
-        //  console.log("err is ",err)
-        //the client was given an error response (5xx,4xx)
         if (err.response) {
           setError(err.message);
         }
-        //the client never received a response
         else if (err.request) {
           setError(err.message);
         }
-        //for other error
         else {
           setError(err.message);
         }
       });
   };
-
-
- //on file select
  const onFileSelect=(e)=>{
   setSelectedFile(e.target.files[0])
  }
-
-
   return (
     <div className="add-user">
-      <p className="display-3 text-center">Add New User</p>
-      {/* form submission error */}
+      <p className="register-text text-center">Register</p>
       {error.length !== 0 && (
         <p className="display-3 text-danger text-center">{error}</p>
       )}
-      {/* add user form */}
       <div className="row">
         <div className="col-11 col-sm-8 col-md-6 mx-auto">
           <form onSubmit={handleSubmit(addNewUser)}>
-            {/* username */}
             <div className="mb-3">
-              <label htmlFor="name">Userame</label>
+              <label htmlFor="name">Username</label>
               <input
                 type="text"
                 id="username"
@@ -87,19 +67,70 @@ function Register() {
                 placeholder="e.g. John"
                 {...register("username", { required: true })}
               />
-              {/* validation errors for name */}
               {errors.username?.type === "required" && (
                 <p className="text-danger fw-bold fs-5">
-                  * Username is required
+                  <Alert severity="error">* Username is required</Alert>
+                
                 </p>
               )}
             </div>
+            <div className="mb-3">
+              <label htmlFor="name">Type of User</label>
+              <select
+                type="text"
+                id="typeofuser"
+                className="form-select"
+                placeholder="e.g. John"
+                {...register("typeofuser", { required: true })}>
+                <option value="Farmer">Farmer</option>
+                <option value="Food Hub">Food Hub</option>
+                <option value="Customer">Customer
+                </option>
+                </select>
+             
+              {errors.typeofuser?.type === "required" && (
+                <p className="text-danger fw-bold fs-5">
+                  <Alert severity="error">* Type of User is required</Alert>
+                
+                </p>
+              )}
+            </div>
+            <div className="mb-3">
+              <label htmlFor="name">Phone number</label>
+              <input
+                type="text"
+                id="phonenumber"
+                className="form-control"
+              
+                {...register("phonenumber", { required: true,maxLength:"10",minLength:"10" })}
+              />
+              {errors.phonenumber?.type === "required" && (
+                <p className="text-danger fw-bold fs-5">
+                  <Alert severity="error">* phone number is required</Alert>
+                
+                </p>
+              )}
+               {errors.phonenumber?.type === "minLength" && (
+                <p className="text-danger fw-bold fs-5">
+                  <Alert severity="error">* minLength is 10</Alert>
+                
+                </p>
+              )}
+          
+            {errors.phonenumber?.type === "maxLength" && (
+                <p className="text-danger fw-bold fs-5">
+                  <Alert severity="error">* maxLength is 10</Alert>
+                
+                </p>
+              )}
+            </div>
+            
             {/* password */}
             <div className="mb-3">
               <label htmlFor="name">Password</label>
               <input
                 type="password"
-                placeholder="*********"
+                placeholder="***"
                 id="password"
                 className="form-control"
                 {...register("password", { required: true })}
@@ -107,7 +138,8 @@ function Register() {
               {/* validation errors for name */}
               {errors.password?.type === "required" && (
                 <p className="text-danger fw-bold fs-5">
-                  * Password is required
+                  <Alert severity="error">* Password is required</Alert>
+                
                 </p>
               )}
             </div>
@@ -123,7 +155,7 @@ function Register() {
               />
               {/* validation errors for email */}
               {errors.email?.type === "required" && (
-                <p className="text-danger fw-bold fs-5">* Email is required</p>
+                <p className="text-danger fw-bold fs-5"><Alert severity="error">*Email is Required</Alert></p>
               )}
             </div>
             {/* date of birth */}
@@ -138,7 +170,25 @@ function Register() {
               {/* validation errors for name */}
               {errors.dob?.type === "required" && (
                 <p className="text-danger fw-bold fs-5">
-                  *Date of birth is required
+                  <Alert severity="error">*Date of birth is required</Alert>
+                  
+                </p>
+              )}
+            </div>
+            
+            <div className="mb-3">
+              <label htmlFor="name">Address</label>
+              <textarea
+                type="text"
+                id="Address"
+                className="form-control"
+                placeholder="e.g.Kukatpally,Hyderabad,500072"
+                {...register("Address", { required: true })}
+              />
+              {errors.Address?.type === "required" && (
+                <p className="text-danger fw-bold fs-5">
+                  <Alert severity="error">* Address is required</Alert>
+                
                 </p>
               )}
             </div>
@@ -157,15 +207,15 @@ function Register() {
               {/* validation errors for image */}
               {errors.image?.type === "required" && (
                 <p className="text-danger fw-bold fs-5">
-                  *Image URL is required
+                  <Alert severity="error">*Image URL is required</Alert>
                 </p>
               )}
             </div>
 
 
             {/* submit button */}
-            <button type="submit" className="btn btn-primary">
-              Regsiter
+            <button type="submit" className="btn btn-primary mb-5">
+              Register
             </button>
           </form>
         </div>

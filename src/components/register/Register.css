@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+.register-text
+{
+    color: rgb(53, 62, 58);
+    font-family: 'Oswald', sans-serif;
+    font-weight: bolder;
+    font-size: 3rem;
+   
+}
+.add-user
+{
+
+   background-size: cover;
+   font-weight: bold;
+   margin: 20px;
+   border-radius: 30px;
+   padding: 40px;
+   box-shadow: 8px 8px 8px #918e8e;
+}

@@ -9,7 +9,10 @@ function RootLayout() {
       <div className="content-container">
         <NavigationBar />
         <div className="container">
-          <Outlet />
+          <div style={{minHeight:"100vh"}}>
+            <Outlet/>
+          </div>
+         
         </div>
       </div>
       <div className="footer-container">

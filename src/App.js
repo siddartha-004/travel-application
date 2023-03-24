@@ -5,7 +5,7 @@ import RootLayout from './components/RootLayout'
 import  Home from './components/home/Home';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
-import Aboutus from './components/aboutus/Aboutus'
+import Blog from './components/blog/Blog'
 import UserProfile from './components/user-profile/UserProfile';
 import Products from './components/products/Products';
 import Cart from './components/cart/Cart'
@@ -30,8 +30,8 @@ function App() {
           element:<Login />
         },
         {
-          path:"/aboutus",
-          element:<Aboutus />
+          path:"/blog",
+          element:<Blog />
         },
         {
           path:"/user-profile",

@@ -16,7 +16,7 @@ app.use(exp.static(path.join(__dirname,'./build')))
 const mclient=require("mongodb").MongoClient;
 
 //connect to MongoDB server
-mclient.connect('mongodb://localhost:27017/demodb')
+mclient.connect('mongodb://0.0.0.0:27017')
 .then(dbRef=>{
   //get database obj
   let dbObj=dbRef.db('demodb')

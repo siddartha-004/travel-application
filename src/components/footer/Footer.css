@@ -1,6 +1,4 @@
-footer {
-  padding: 50px;
-  text-align: center;
-  background-color: rgb(57, 55, 55);
-  color: azure;
+.foot
+{
+    background-image: url("https://static.vecteezy.com/system/resources/previews/000/404/637/original/logo-of-nature-organic-farming-vector.jpg")
 }

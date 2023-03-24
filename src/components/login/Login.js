@@ -8,28 +8,15 @@ function Login() {
 
 
   let [currentUser,error,userLoginStatus,loginUser,logoutUser]=useContext(loginContext)
-
-   //error state
-  // let [err, setErr] = useState("");
-
-   //navigate
    const navigate = useNavigate();
- 
-   //use form hook
    let {
      register,
      handleSubmit,
      formState: { errors },
    } = useForm();
-
-
-   //user login
    const handleUserLogin=(userCredObj)=>{
-  //  console.log(userCredObj)
     loginUser(userCredObj)
    }
-
-
    useEffect(()=>{
     if(userLoginStatus==true){
       navigate("/user-profile")
@@ -71,7 +58,7 @@ function Login() {
               <label htmlFor="name">Password</label>
               <input
                 type="password"
-                placeholder="*********"
+                placeholder="***"
                 id="password"
                 className="form-control"
                 {...register("password", { required: true })}
@@ -98,4 +85,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Login;
